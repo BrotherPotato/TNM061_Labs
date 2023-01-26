@@ -91,7 +91,7 @@ function createSceneGraph() {
   moonTilt.rotation.z = 5 / (2 * Math.PI);
   moonTrans.position.x = -1.5;
 
-  earthSpin.add(moonOrbit);
+  earthTrans.add(moonOrbit);
   moonOrbit.add(moonTrans);
   moonTrans.add(moonTilt);
   moonTilt.add(moonSpin);
@@ -221,17 +221,20 @@ function render() {
   if (animation) {
     // 6 = 360/60
     // 6 / 27.3 = 1 orbit per 27.3 seconds
-    sunSpin.rotation.y += (25 / 360 / 60) * (Math.PI / 180);
+    sunSpin.rotation.y += (360 / 60) * (1 / 25) * (Math.PI / 180);
 
     //earthSpin.rotation.y += (24 / 60) * (Math.PI / 180);
     //earthOrbit.rotation.y += (6 / 365) * (Math.PI / 180);
     //earthOrbit.rotation.y += (365 / (360 / 60)) * (PI / 180);
-    earthOrbit.rotation.y += (365 / 360 / 60) * (Math.PI / 180);
-    //earthOrbit.rotation.y += 0.1 / 365; //1 orbit per 365 days
+    //earthOrbit.rotation.y += (365 / 360 / 60) * (Math.PI / 180);
+    //earthOrbit.rotation.y += 1 / 365; //1 orbit per 365 days
 
-    moonOrbit;
-    //moonOrbit.rotation.y += (-6 / 27.3) * (Math.PI / 180);
-    moonSpin.rotation.y += (365 / 360 / 60) * (Math.PI / 180);
+    earthOrbit.rotation.y += (360 / 60) * (1 / 365) * (Math.PI / 180);
+    earthSpin.rotation.y += 0.01;
+
+    moonOrbit.rotation.y += (-6 / 27.3) * (Math.PI / 180);
+    //moonSpin.rotation.y += (365 / 360 / 60) * (Math.PI / 180);
+    moonSpin.rotation.y += (360 / 60) * (1 / 27.3) * (Math.PI / 180);
 
     weezerOrbit.rotation.y += 0.02 / 365;
     weezerSpin.rotation.y += 0.01;
