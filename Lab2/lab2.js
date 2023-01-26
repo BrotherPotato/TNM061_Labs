@@ -71,7 +71,7 @@ function createSceneGraph() {
   weezerTrans.position.x = 9.5;
   weezerTilt.rotation.z = 0.0;
 
-  SunMesh.add(weezerOrbit);
+  viewRoot.add(weezerOrbit);
   weezerOrbit.add(weezerTrans);
   weezerTrans.add(weezerTilt);
   weezerTilt.add(weezerSpin);
@@ -81,7 +81,7 @@ function createSceneGraph() {
   earthTrans.position.x = 5.8;
   earthTilt.rotation.z = -0.409105;
 
-  SunMesh.add(earthOrbit);
+  viewRoot.add(earthOrbit);
   earthOrbit.add(earthTrans);
   earthTrans.add(earthTilt);
   earthTilt.add(earthSpin);
@@ -219,12 +219,19 @@ function render() {
 
   // Perform animations
   if (animation) {
-    sunSpin.rotation.y += 0.1 / 25;
+    // 6 = 360/60
+    // 6 / 27.3 = 1 orbit per 27.3 seconds
+    sunSpin.rotation.y += (25 / 360 / 60) * (Math.PI / 180);
 
-    earthSpin.rotation.y += 0.01;
-    earthOrbit.rotation.y += 1 / 365;
+    //earthSpin.rotation.y += (24 / 60) * (Math.PI / 180);
+    //earthOrbit.rotation.y += (6 / 365) * (Math.PI / 180);
+    //earthOrbit.rotation.y += (365 / (360 / 60)) * (PI / 180);
+    earthOrbit.rotation.y += (365 / 360 / 60) * (Math.PI / 180);
+    //earthOrbit.rotation.y += 0.1 / 365; //1 orbit per 365 days
 
-    moonOrbit.rotation.y += -0.1 / 27.3;
+    moonOrbit;
+    //moonOrbit.rotation.y += (-6 / 27.3) * (Math.PI / 180);
+    moonSpin.rotation.y += (365 / 360 / 60) * (Math.PI / 180);
 
     weezerOrbit.rotation.y += 0.02 / 365;
     weezerSpin.rotation.y += 0.01;
